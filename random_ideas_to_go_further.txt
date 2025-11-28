@@ -1,0 +1,23 @@
+On peut lister ici les idées pour aller plus loin que juste entrainer un modèle CLIP. A garder en tête que c'est vraiment seulement si on a le temps/l'envie/la place dans le rapport
+
+# 1 - Evaluer l'effet du batch size du model clip sur sa qualité
+
+- Dans le calcul de la loss contrastive, le dénominateur dépend de la taille du batch. Un batch plus grand augmente le "contraste" et donc la séparation entre les vecteurs latents non appareillés.
+
+- On pourrait proposé une figure qui montre les différences de qualité du modèle en fonction du batch size
+
+- C'est un point intéressant à discuter selon Todorov
+
+- Pour aller encore plus loin on peut aussi tenter d'implémenter une stratégie qui permet d'augmenter (sans faire exploser la mémoire) la "contrastivité" de la loss. Bon la ça peut prendre encore plus de temps le temps de comprendre la méthode.
+
+
+# 2 - Utiliser le modèle clip comme un modèle de classification
+
+- Dans l'utilisation du modèle clip, on input une image ou un texte et on récupère un vecteur latent. On compare ce vecteur latent à une BDD des vecteurs des données train. Comme chaque vecteur de la BDD est associé à une classe, on pourriat utiliser le modèle CLIP pour faire d ela classif sur les vecteurs latents.
+
+- C'est quelquechose qui pourrait être marrant à faire selon Poncelet.
+
+- L'idée derière ce serait de comparer la capacité de classification de CLIP avec avec les modèles de classif (CNN et smallBert) fait avant.
+
+- Pour aller encore plus loin: evaluer comment la loss contrastive modifie les vecteurs latents de chaque partie (CNN et smallBert). Exemple de questions à poser: Est-ce-que la loss contrastive fait bouger les vecteurs latents du texte ? de l'image ? des deux ? de combien ?
+	--> cela peut se faire aussi visuellement par une PCA ou un t-SNE pour ne pas perdre trop de temps dessus (ou des plots de répartition de distance)
